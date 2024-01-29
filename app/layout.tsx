@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "ThreadVisio Clothes shop",
   description: "Create your own cloth.",
 };
