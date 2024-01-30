@@ -18,6 +18,10 @@ body {
   color: var(--darkmode-color);
 }
 
+h1.title {
+  font-size: 25px;
+}
+
 a.underlined {
   color: var(--main-color);
   text-decoration: underline;
@@ -33,6 +37,18 @@ a.underlined {
 
 [data-theme="dark"] .img2-invert {
   content: url("/slider_image_title2_white.png");
+}
+
+.custom-btn {
+  @apply flex flex-row relative justify-center items-center py-3 px-6 outline-none;
+}
+
+.footer__links {
+  @apply flex-1 w-full flex md:justify-center flex-wrap max-md:mt-10 gap-20;
+}
+
+.footer__link {
+  @apply flex flex-col gap-6 text-base min-w-[170px];
 }
 
 
