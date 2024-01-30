@@ -1,6 +1,7 @@
 import "./globals.css";
 import ThemeProviders from "../darkmode/ThemeProviders";
 import ThemeSwitcher from "../darkmode/ThemeSwitcher";
+import { Footer } from "@/components";
 
 export const metadata = {
   title: "ThreadVisio Clothes shop",
@@ -13,8 +14,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
       <body className='relative'>
         <ThemeProviders>
           <ThemeSwitcher />
-            {children}
+          {children}
         </ThemeProviders>
+        <Footer />
       </body>
     </html>
   );
