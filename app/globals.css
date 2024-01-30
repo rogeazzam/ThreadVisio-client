@@ -27,6 +27,14 @@ a.underlined {
   @apply sm:px-16 px-6;
 }
 
+[data-theme="dark"] .img1-invert {
+  content: url("/slider_image_title1_white.png");
+}
+
+[data-theme="dark"] .img2-invert {
+  content: url("/slider_image_title2_white.png");
+}
+
 
 /********************************** Dark/Light Mode toggle styles **********************************/
 .dark_mode {
