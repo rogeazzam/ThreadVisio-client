@@ -3,6 +3,7 @@
 import { CustomButton, DatePick, OTPField } from '@/components';
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const Signup = () => {
   const [step, setStep] = useState(1);
@@ -29,11 +30,55 @@ const Signup = () => {
   }
 
   const nextStep = async () => {
-    setStep(step + 1);
+    let data;
+    if (step === 1) {
+      const res = await axios.post('http://localhost:8000/register1', {
+        email
+      });
+      data = res.data;
+    } else if (step === 2) {
+      const res = await axios.post('http://localhost:8000/register2', {
+        email,
+        first_name: firstName,
+        last_name: lastName
+      });
+      data = res.data;
+    } else if (step === 3) {
+      const res = await axios.post('http://localhost:8000/register3', {
+        email,
+        password,
+        confirm_password: confirmPass
+      });
+      data = res.data;
+    } else if (step == 4) {
+      const res = await axios.post('http://localhost:8000/register4', {
+        email,
+        year,
+        month,
+        day
+      });
+      data = res.data;
+    }
+    if (data.error) {
+      setError(data.error);
+      setPassword('');
+      setConfirmPass('');
+    } else {
+      setError('');
+      setStep(step + 1);
+    }
   };
 
   const handleSubmit = async () => {
-    push('/');
+    const { data } = await axios.post('http://localhost:8000/register5', {
+      email,
+      verification_code: otp.map(ref => ref.toString()).join('')
+    });
+    if (data.error) {
+      setError(data.error);
+    } else {
+      push('/signin');
+    }
   };
 
   return (
