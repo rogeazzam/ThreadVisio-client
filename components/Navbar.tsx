@@ -26,7 +26,7 @@ const Navbar = () => {
                     title='Sign in'
                     btnType='button'
                     containerStyles='text-primary-blue rounded-full bg-transparent min-w-[130px]'
-                    handleClick={() => push('/')}
+                    handleClick={() => push('/signin')}
                 />
 
                 <CustomButton
