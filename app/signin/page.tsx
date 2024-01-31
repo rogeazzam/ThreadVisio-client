@@ -1,6 +1,6 @@
 "use client"
 import { CustomButton } from '@/components';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Signin = () => {
@@ -25,7 +25,7 @@ const Signin = () => {
             setError(data.error);
         } else {
             // Navigate to '/feed' page and refresh it inorder to get the updated User information.
-            console.log(data);
+            window.location.href = "feed";
         }
     };
 
