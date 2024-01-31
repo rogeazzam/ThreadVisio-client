@@ -51,6 +51,55 @@ a.underlined {
   @apply flex flex-col gap-6 text-base min-w-[170px];
 }
 
+.sign-in__bar {
+  border: 2px solid #e6e6e6;
+  box-shadow: 1px 1px 3px #0f141b,
+    -1px -1px 3px #0f141b;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  @apply flex justify-start flex-col w-full relative max-sm:gap-4 max-w-md;
+}
+
+[data-theme="dark"] .sign-in__bar {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 6px #000000,
+    -3px -3px 6px #000000;
+}
+
+.sign-in__btn {
+  border: 1px solid #143d8e;
+}
+
+[data-theme="dark"] .sign-in__btn {
+  border-color: #fff;
+}
+
+.margin-20 {
+  margin-top: 20px;
+}
+
+.bar__item {
+  @apply flex-1 w-full flex justify-start items-center relative;
+}
+
+.bar__input {
+  box-shadow: 1px 1px 3px #0f141b,
+    -1px -1px 3px #0f141b;
+  @apply w-full h-[48px] pl-12 p-4 bg-transparent rounded-r-full rounded-full outline-none cursor-pointer text-sm;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
 /********************************** Dark/Light Mode toggle styles **********************************/
 .dark_mode {
