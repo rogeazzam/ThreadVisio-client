@@ -1,6 +1,7 @@
 "use client"
 import { CustomButton } from '@/components';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Signin = () => {
     const [UnameOrEmail, setUnameOrEmail] = useState('');
@@ -14,6 +15,18 @@ const Signin = () => {
 
 
     const handleSignIn = async () => {
+        const { data } = await axios.post('http://localhost:8000/signin', {
+            email: UnameOrEmail,
+            password
+        }, {
+            withCredentials: true
+        });
+        if (data.error) {
+            setError(data.error);
+        } else {
+            // Navigate to '/feed' page and refresh it inorder to get the updated User information.
+            console.log(data);
+        }
     };
 
     return (
