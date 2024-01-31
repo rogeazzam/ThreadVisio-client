@@ -101,6 +101,14 @@ a.underlined {
   cursor: pointer;
 }
 
+[data-theme="dark"] #drop-down-icon {
+  content: url("/drop_down_icon_white.png");
+}
+
+[data-theme="dark"] #drop-down-icon2 {
+  content: url("/drop_down_icon_white2.png");
+}
+
 /********************************** Dark/Light Mode toggle styles **********************************/
 .dark_mode {
   margin-top: -20px;

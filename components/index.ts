@@ -4,6 +4,7 @@ import Footer from './Footer'
 import Imageslider from './Imageslider'
 import Navbar from './Navbar'
 import OTPField from './OtpField'
+import UserNavbar from './UserNavbar'
 
 export {
     CustomButton,
@@ -12,4 +13,5 @@ export {
     Footer,
     DatePick,
     OTPField,
+    UserNavbar,
 }

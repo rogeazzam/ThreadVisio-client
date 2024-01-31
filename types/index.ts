@@ -9,3 +9,10 @@ export interface CustomButtonProps {
   rightIcon?: string;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface UserProps {
+  email: string;
+  first_name: string;
+  last_name: string;
+  role: string;
+}
