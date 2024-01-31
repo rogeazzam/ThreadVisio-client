@@ -33,7 +33,7 @@ const Navbar = () => {
                     title='Sign up'
                     btnType='button'
                     containerStyles='text-primary-blue rounded-full bg-transparent min-w-[130px]'
-                    handleClick={() => push('/')}
+                    handleClick={() => push('/signup')}
                 />
                 </div>
             </nav>
