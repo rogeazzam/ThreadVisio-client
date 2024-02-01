@@ -16,3 +16,15 @@ export interface UserProps {
   last_name: string;
   role: string;
 }
+
+export interface ClothProps {
+  name: string;
+  price: number;
+  color: string;
+  material?: string;
+  size: string;
+  description?: string;
+  quantity?: number;
+  imageUrl: string;
+  otherImagesUrl?: [string];
+}

@@ -22,13 +22,6 @@ interface NavbarProps {
 const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    // const options = [
-    //     { title: "Settings", url: "/", onclick: Logout },
-    //     { title: "Featured", url: "/", onclick: Logout },
-    //     { title: "Orders", url: "/", onclick: Logout },
-    //     { title: "Logout", url: "/", onclick: Logout },
-    // ];
-
     return (
         <div>
             <header className='w-full  absolute z-10 pd-10'>
@@ -47,14 +40,14 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                         <CustomButton
                             title={title1}
                             btnType='button'
-                            containerStyles='text-primary-blue rounded-full bg-transparent min-w-[130px]'
+                            containerStyles='rounded-full bg-transparent min-w-[130px]'
                             handleClick={() => window.location.href =  url_path1}
                         />
 
                         <CustomButton
                             title={title2}
                             btnType='button'
-                            containerStyles='text-primary-blue rounded-full bg-transparent min-w-[130px]'
+                            containerStyles='rounded-full bg-transparent min-w-[130px]'
                             handleClick={url_path2 ? () => window.location.href = url_path2 :
                             () => window.location.href = ""}
                         />
@@ -84,7 +77,7 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                                 <CustomButton
                                     title={item.title}
                                     btnType='button'
-                                    containerStyles='text-primary-blue rounded-full bg-transparent min-w-[130px]'
+                                    containerStyles='rounded-full bg-transparent min-w-[130px]'
                                     handleClick={item.onclick}
                                 />
                             </div>

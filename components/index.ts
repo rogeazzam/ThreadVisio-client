@@ -1,3 +1,4 @@
+import ClothCard from './ClothCard'
 import CustomButton from './CustomButton'
 import DatePick from './DatePick'
 import Footer from './Footer'
@@ -14,4 +15,5 @@ export {
     DatePick,
     OTPField,
     UserNavbar,
+    ClothCard,
 }
