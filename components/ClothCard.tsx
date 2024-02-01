@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { CustomButton } from '.'
+import { ClothDetails, CustomButton } from '.'
 import { ClothProps } from '@/types'
 
 interface ClothCardProps {
@@ -62,6 +62,8 @@ const ClothCard = ({ cloth, op1_title = 'Buy now', op1_image = '/buy_now_icon.pn
                 textStyles='flex justify-center items-center'
                 handleClick={() => setIsOpen(true)}
             />
+
+            <ClothDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} cloth={cloth} />
         </div>
     )
 }

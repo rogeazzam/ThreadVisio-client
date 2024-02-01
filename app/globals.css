@@ -221,3 +221,21 @@ a.underlined {
 }
 
 /*************************************************************************/
+
+.carouselWrapper .carousel.carousel-slider {
+  margin: auto !important;
+  width: 100% !important;
+}
+
+/*************************************** smaller screen style ***************************************/
+
+@media (max-width: 576px) {
+  .hide-smaller {
+    display: none;
+  }
+
+  .carousel.carousel-slider {
+    margin: auto !important;
+    width: 65% !important;
+  }
+}

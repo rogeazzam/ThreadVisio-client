@@ -28,3 +28,9 @@ export interface ClothProps {
   imageUrl: string;
   otherImagesUrl?: [string];
 }
+
+export interface ClothDetailProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  cloth: ClothProps;
+}
