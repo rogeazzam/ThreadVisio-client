@@ -18,6 +18,10 @@ body {
   color: var(--darkmode-color);
 }
 
+[data-theme="dark"] .transition-bg-darkmode {
+  background-color: #242424;
+}
+
 h1.title {
   font-size: 25px;
 }

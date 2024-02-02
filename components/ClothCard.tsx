@@ -45,12 +45,14 @@ const ClothCard = ({ cloth, op1_title = 'Buy now', op1_image = '/buy_now_icon.pn
                         btnType='button'
                         containerStyles='custom-btn rounded-full bg-transparent min-w-[130px]'
                         rightIcon={op1_image}
+                        handleClick={op1 ? () => op1(cloth) : () => {}}
                     />
                     <CustomButton
                         title={op2_title}
                         btnType='button'
                         containerStyles='custom-btn rounded-full bg-transparent min-w-[130px]'
                         rightIcon={op2_image}
+                        handleClick={op2 ? () => op2(cloth) : () => {}}
                     />
                 </div>
             </div>
