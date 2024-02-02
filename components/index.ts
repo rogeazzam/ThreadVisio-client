@@ -7,6 +7,7 @@ import Imageslider from './Imageslider'
 import Navbar from './Navbar'
 import OTPField from './OtpField'
 import UserNavbar from './UserNavbar'
+import WishList from './WishList'
 
 export {
     CustomButton,
@@ -18,4 +19,5 @@ export {
     UserNavbar,
     ClothCard,
     ClothDetails,
+    WishList,
 }

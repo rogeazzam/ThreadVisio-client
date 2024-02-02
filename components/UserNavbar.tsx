@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { CustomButton } from '@/components'
+import WishList from './WishList'
 
 interface DropdownOption {
     title: string;
@@ -21,6 +22,7 @@ interface NavbarProps {
 
 const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isWishListOpen, setIsWishListOpen] = useState(false);
 
     return (
         <div>
@@ -41,7 +43,7 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                             title={title1}
                             btnType='button'
                             containerStyles='rounded-full bg-transparent min-w-[130px]'
-                            handleClick={() => window.location.href =  url_path1}
+                            handleClick={() => window.location.href = url_path1}
                         />
 
                         <CustomButton
@@ -49,7 +51,7 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                             btnType='button'
                             containerStyles='rounded-full bg-transparent min-w-[130px]'
                             handleClick={url_path2 ? () => window.location.href = url_path2 :
-                            () => window.location.href = ""}
+                                () => setIsWishListOpen(true)}
                         />
 
                         <button
@@ -85,6 +87,9 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                     </div>
                 }
             </header>
+
+            {isWishListOpen &&
+                <WishList isOpen={isWishListOpen} closeModal={() => setIsWishListOpen(false)} />}
         </div>
     )
 }
