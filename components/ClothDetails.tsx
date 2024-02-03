@@ -2,11 +2,87 @@
 
 import { ClothDetailProps } from '@/types'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import Image from 'next/image'
 import { Imageslider } from '.'
 
-const ClothDetails = ({ isOpen, closeModal, cloth }: ClothDetailProps) => {
+const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetailProps &
+{ submitClothItem?: any }) => {
+
+    //******* Code related only to adding a new cloth. *******//
+    const [isNew, setIsNew] = useState(cloth.imageUrl === '/question_mark.jpg');
+    const [images, setImages] = useState(cloth.otherImagesUrl ? [...[cloth.imageUrl], ...cloth.otherImagesUrl] :
+        [cloth.imageUrl]);
+    const [name, setName] = useState(cloth.name);
+    const [price, setPrice] = useState(cloth.price);
+    const [size, setSize] = useState(cloth.size);
+    const [description, setDescription] = useState(cloth.description);
+    const [quantity, setQuantity] = useState(cloth.quantity);
+    const [color, setColor] = useState(cloth.color);
+    const [material, setMaterial] = useState(cloth.material);
+    const options = ['s', 'm', 'l', 'xl', 'xxl', '3xl'];
+
+    const addImageToCloth = async (imageUrl: string) => {
+        if (cloth.imageUrl === '/question_mark.jpg') {
+            setImages([imageUrl]);
+            cloth.imageUrl = imageUrl;
+        } else {
+            if (!cloth.otherImagesUrl) {
+                cloth.otherImagesUrl = [imageUrl];
+            } else {
+                cloth.otherImagesUrl?.push(imageUrl);
+            }
+        }
+    }
+
+    const handleNameChange = (e: { target: { value: string } }) => {
+        setName(e.target.value);
+    }
+
+    const handlePriceChange = (e: { target: { value: string } }) => {
+        try {
+            setPrice(parseFloat(e.target.value));
+        } catch (error) {
+            console.error("Error setting price", error)
+        }
+    }
+
+    const handleSizeChange = (e: { target: { value: string } }) => {
+        setSize(e.target.value);
+    }
+
+    const handleDescChange = (e: { target: { value: string } }) => {
+        setDescription(e.target.value);
+    }
+
+    const handleQuantityChange = (e: { target: { value: string } }) => {
+        try {
+            setQuantity(parseFloat(e.target.value));
+        } catch (error) {
+            console.error("Error setting quantity", error)
+        }
+    }
+
+    const handleColorChange = (e: { target: { value: string } }) => {
+        setColor(e.target.value);
+    }
+
+    const handleMaterialChange = (e: { target: { value: string } }) => {
+        setMaterial(e.target.value);
+    }
+
+    const submitClothItemTrig = async () => {
+        cloth.name = name;
+        cloth.price = price;
+        cloth.size = size;
+        cloth.description = description;
+        cloth.quantity = quantity;
+        cloth.color = color;
+        cloth.material = material;
+        submitClothItem(cloth);
+    }
+    //***************************************************************//
+
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
@@ -53,17 +129,96 @@ const ClothDetails = ({ isOpen, closeModal, cloth }: ClothDetailProps) => {
                                         <div className='relative w-full bg-pattern bg-cover bg-center rounded-lg'>
                                             <div className='carouselWrapper h-fit'>
                                                 <Imageslider
-                                                    images={cloth.otherImagesUrl ? [...[cloth.imageUrl], ...cloth.otherImagesUrl] :
-                                                        [cloth.imageUrl]} />
+                                                    images={images} />
                                             </div>
+
+                                            {isNew && <button
+                                                className='m-auto rounded-full bg-transparent sign-in__btn min-w-[130px]'
+                                                onClick={() => addImageToCloth('/slider_image1.png')}>
+                                                Add Image
+                                            </button>}
                                         </div>
                                     </div>
-                                    <div className='flex-1 flex flex-col gap-3 pt-4'>
-                                        <h2 className='font-semibold text-xl capitalize'>
-                                            {cloth.price}$
-                                        </h2>
-                                        <p>{cloth.description}</p>
-                                    </div>
+                                    {!isNew &&
+                                        <div className='flex-1 flex flex-col gap-3 pt-4'>
+                                            <h2 className='font-semibold text-xl capitalize'>
+                                                {cloth.price}$
+                                            </h2>
+                                            <p>{cloth.description}</p>
+                                        </div>
+                                    }
+
+                                    {/* This Section is for setting all the neccessary data for the new cloth */}
+                                    {isNew &&
+                                        <div className='flex-1 flex flex-col gap-3 pt-4 round-input'>
+
+                                            <input
+                                                className='font-semibold text-xl capitalize rounded-full'
+                                                type="text"
+                                                value={name}
+                                                onChange={handleNameChange}
+                                            />
+
+                                            <div className='flex flex-row'>
+                                                <input
+                                                    className='font-semibold text-xl capitalize rounded-full'
+                                                    type="number"
+                                                    value={price}
+                                                    onChange={handlePriceChange}
+                                                    required
+                                                />
+                                                <h2 className='font-semibold text-xl capitalize'>
+                                                    $
+                                                </h2>
+                                            </div>
+
+                                            <select className='rounded-full bg-transparent sign-in__btn min-w-[130px]'
+                                                value={size} onChange={handleSizeChange}>
+                                                {options.map((option, index) => (
+                                                    <option className='style__option' key={index} value={option}>
+                                                        {option}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            <input
+                                                className='font-semibold text-xl capitalize rounded-full'
+                                                type="text"
+                                                value={description}
+                                                onChange={handleDescChange}
+                                            />
+
+                                            <input
+                                                className='font-semibold text-xl capitalize rounded-full'
+                                                type="number"
+                                                value={quantity}
+                                                onChange={handleQuantityChange}
+                                                required
+                                            />
+
+                                            <input
+                                                className='font-semibold text-xl capitalize rounded-full'
+                                                type="text"
+                                                value={color}
+                                                onChange={handleColorChange}
+                                            />
+
+                                            <input
+                                                className='font-semibold text-xl capitalize rounded-full'
+                                                type="text"
+                                                value={material}
+                                                onChange={handleMaterialChange}
+                                            />
+
+                                        </div>
+                                    }
+                                    {/*************************************************************************/}
+
+                                    {isNew && <button
+                                        className='m-auto rounded-full bg-transparent sign-in__btn min-w-[130px]'
+                                        onClick={() => submitClothItemTrig()}>
+                                        Submit
+                                    </button>}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

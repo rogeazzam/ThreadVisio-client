@@ -145,6 +145,10 @@ a.underlined {
   color: #fff;
 }
 
+[data-theme="dark"] .style__option {
+  background-color: #242424;
+}
+
 /********************************** Dark/Light Mode toggle styles **********************************/
 .dark_mode {
   margin-top: -20px;

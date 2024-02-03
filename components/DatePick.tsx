@@ -70,7 +70,7 @@ const DatePick = ({ year, setYear, month, setMonth, day, setDay }: any) => {
                         }
                     }}>
                     {options.map((option, index) => (
-                        <option key={index} value={option}>
+                        <option className='style__option' key={index} value={option}>
                             {option}
                         </option>
                     ))}

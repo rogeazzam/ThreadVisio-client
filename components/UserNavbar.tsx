@@ -23,6 +23,7 @@ interface NavbarProps {
 const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isWishListOpen, setIsWishListOpen] = useState(false);
+    const isSmallScreen = window.innerWidth <= window.innerHeight - 350;
 
     return (
         <div>
@@ -39,20 +40,23 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                     </Link>
 
                     <div className='sm:flex sm:flex-row float-right sm:pl-10 pl-20'>
-                        <CustomButton
-                            title={title1}
-                            btnType='button'
-                            containerStyles='rounded-full bg-transparent min-w-[130px]'
-                            handleClick={() => window.location.href = url_path1}
-                        />
+                        {!isSmallScreen && (
+                            <>
+                                <CustomButton
+                                    title={title1}
+                                    btnType='button'
+                                    containerStyles='rounded-full bg-transparent min-w-[130px]'
+                                    handleClick={() => window.location.href = url_path1}
+                                />
 
-                        <CustomButton
-                            title={title2}
-                            btnType='button'
-                            containerStyles='rounded-full bg-transparent min-w-[130px]'
-                            handleClick={url_path2 ? () => window.location.href = url_path2 :
-                                () => setIsWishListOpen(true)}
-                        />
+                                <CustomButton
+                                    title={title2}
+                                    btnType='button'
+                                    containerStyles='rounded-full bg-transparent min-w-[130px]'
+                                    handleClick={url_path2 ? () => window.location.href = url_path2 :
+                                        () => setIsWishListOpen(true)}
+                                /></>
+                        )}
 
                         <button
                             type='button'
@@ -74,6 +78,27 @@ const UserNavbar = ({ title1, url_path1, title2, url_path2, options }: NavbarPro
                 {isOpen &&
                     <div className='float-right w-72 footer__link border-slate-900
                      bg-transparent rounded-md items-center border-2'>
+                        {isSmallScreen && title1 && (
+                            <div className='p-1'>
+                                <CustomButton
+                                    title={title1}
+                                    btnType='button'
+                                    containerStyles='rounded-full bg-transparent min-w-[130px]'
+                                    handleClick={() => window.location.href = url_path1}
+                                />
+                            </div>
+                        )}
+                        {isSmallScreen && title2 && (
+                            <div className='p-1'>
+                                <CustomButton
+                                    title={title2}
+                                    btnType='button'
+                                    containerStyles='rounded-full bg-transparent min-w-[130px]'
+                                    handleClick={url_path2 ? () => window.location.href = url_path2 :
+                                        () => setIsWishListOpen(true)}
+                                />
+                            </div>
+                        )}
                         {options.map((item, i) => (
                             <div key={i} className='p-1'>
                                 <CustomButton

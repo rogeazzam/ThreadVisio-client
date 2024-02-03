@@ -35,7 +35,7 @@ const ClothCard = ({ cloth, op1_title = 'Buy now', op1_image = '/buy_now_icon.pn
             </p>
 
             <div className='relative w-full h-40 my-3 object-contain'>
-                <Image src={imageUrl} alt='car model' fill priority className='object-contain' />
+                <Image src={imageUrl} alt='cloth model' fill priority className='object-contain' />
             </div>
 
             <div className='relative flex m-auto w-11/12 mt-2'>
