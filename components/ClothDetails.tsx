@@ -2,9 +2,11 @@
 
 import { ClothDetailProps } from '@/types'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Imageslider } from '.'
+import ImageUploader from './ImageUploader'
+import { handleUploadFile } from '@/utils'
 
 const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetailProps &
 { submitClothItem?: any }) => {
@@ -13,6 +15,7 @@ const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetai
     const [isNew, setIsNew] = useState(cloth.imageUrl === '/question_mark.jpg');
     const [images, setImages] = useState(cloth.otherImagesUrl ? [...[cloth.imageUrl], ...cloth.otherImagesUrl] :
         [cloth.imageUrl]);
+    const [toUpload, setToUpload] = useState<any>([]);
     const [name, setName] = useState(cloth.name);
     const [price, setPrice] = useState(cloth.price);
     const [size, setSize] = useState(cloth.size);
@@ -21,17 +24,37 @@ const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetai
     const [color, setColor] = useState(cloth.color);
     const [material, setMaterial] = useState(cloth.material);
     const options = ['s', 'm', 'l', 'xl', 'xxl', '3xl'];
+    const [first, setFirst] = useState(true);
 
-    const addImageToCloth = async (imageUrl: string) => {
-        if (cloth.imageUrl === '/question_mark.jpg') {
-            setImages([imageUrl]);
-            cloth.imageUrl = imageUrl;
-        } else {
-            if (!cloth.otherImagesUrl) {
-                cloth.otherImagesUrl = [imageUrl];
+    useEffect(() => {
+        let temp = [];
+        for (let i = 0; i < images.length; i++) {
+            temp.push("http://localhost:8000/Images/" + images[i]);
+        }
+        setImages(temp);
+    }, [])
+
+
+    const addImageToCloth = (event: any) => {
+        try {
+            const imageUrl = URL.createObjectURL(event.target.files[0]);
+            const data = new FormData()
+            data.append('file', event.target.files[0])
+
+            if (first) {
+                setImages([imageUrl]);
+                setFirst(false);
             } else {
-                cloth.otherImagesUrl?.push(imageUrl);
+                setImages([...images, ...[imageUrl]]);
             }
+
+            if (!toUpload) {
+                setToUpload([data]);
+            } else {
+                setToUpload([...toUpload, ...[data]]);
+            }
+        } catch (error) {
+            console.error('Error pushin upload image', error);
         }
     }
 
@@ -72,6 +95,19 @@ const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetai
     }
 
     const submitClothItemTrig = async () => {
+        for (let i = 0; i < toUpload.length; i++) {
+            const img_path = await handleUploadFile(toUpload[i]);
+            if (i == 0) {
+                cloth.imageUrl = img_path;
+            } else {
+                if (!cloth.otherImagesUrl) {
+                    cloth.otherImagesUrl = [img_path];
+                } else {
+                    cloth.otherImagesUrl?.push(img_path);
+                }
+            }
+        }
+
         cloth.name = name;
         cloth.price = price;
         cloth.size = size;
@@ -132,11 +168,7 @@ const ClothDetails = ({ isOpen, closeModal, cloth, submitClothItem }: ClothDetai
                                                     images={images} />
                                             </div>
 
-                                            {isNew && <button
-                                                className='m-auto rounded-full bg-transparent sign-in__btn min-w-[130px]'
-                                                onClick={() => addImageToCloth('/slider_image1.png')}>
-                                                Add Image
-                                            </button>}
+                                            {isNew && <ImageUploader addImageToCloth={addImageToCloth} />}
                                         </div>
                                     </div>
                                     {!isNew &&

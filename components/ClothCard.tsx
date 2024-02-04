@@ -17,7 +17,8 @@ interface ClothCardProps {
 
 const ClothCard = ({ cloth, op1_title = 'Buy now', op1_image = '/buy_now_icon.png', op1,
     op2_title = 'Add to Cart', op2_image = '/cart_icon.png', op2 }: ClothCardProps) => {
-    const { name, price, color, material, size, description, quantity, imageUrl } = cloth;
+    const { name, price, color, material, size, description, quantity } = cloth;
+    const imageUrl = "http://localhost:8000/Images/" + cloth.imageUrl;
 
     const [isOpen, setIsOpen] = useState(false);
 

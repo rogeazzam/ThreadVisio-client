@@ -67,3 +67,18 @@ export const addCloth = async (cloth: ClothProps) => {
         console.error('Error adding cloth item:', error);
     }
 }
+
+export const handleUploadFile = async (data: FormData) => {
+    try {
+        const response = await axios.post('http://localhost:8000/files/upload', data, {
+            withCredentials: true
+        });
+        if (response.data.error) {
+            console.log(response.data.error);
+        }
+
+        return response.data;
+    } catch (error) {
+        console.error('Error uploading file:', error);
+    }
+}
