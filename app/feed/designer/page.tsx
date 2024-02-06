@@ -27,7 +27,7 @@ const ClothDesigner = ({ user }: { user: UserProps }) => {
 
     const submitImageTrig = async () => {
         const data = await submitImage(imageUrl ,image2Url);
-        setSubmitTxt(data);
+        setSubmitTxt(data.data);
     }
 
     return (
