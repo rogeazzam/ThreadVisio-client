@@ -82,3 +82,38 @@ export const handleUploadFile = async (data: FormData) => {
         console.error('Error uploading file:', error);
     }
 }
+
+export const generateImage = async (designerDesc: string) => {
+    try {
+        const response = await axios.post('http://localhost:8000/openai/generateimage', {
+            chatTxt: designerDesc
+        }, {
+            withCredentials: true
+        });
+        if (response.data.error) {
+            console.log(response.data.error);
+        }
+
+        return response.data;
+    } catch (error) {
+        console.error('Error generating image:', error);
+    }
+}
+
+export const submitImage = async (imageUrl: string, image2Url: string) => {
+    try {
+        const response = await axios.post('http://localhost:8000/openai/submitimage', {
+            frontImageUrl: imageUrl,
+            backImageUrl: image2Url
+        }, {
+            withCredentials: true
+        });
+        if (response.data.error) {
+            console.log(response.data.error);
+        }
+
+        return response.data;
+    } catch (error) {
+        console.error('Error submitting image:', error);
+    }
+}
